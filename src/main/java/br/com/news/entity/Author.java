@@ -1,11 +1,9 @@
 package br.com.news.entity;
-import br.com.news.utils.SignatureStatus;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -14,7 +12,8 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorEntity {
+public class Author {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,9 +35,6 @@ public class AuthorEntity {
 
     @Column(nullable = false, length = 255)
     private String signature;
-
-    @Column(nullable = false)
-    private SignatureStatus status;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isEditor;
