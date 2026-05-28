@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head">
+</head>
+<body>
+    <h1>Últimas Notícias</h1>
+
+    <div th:each="news : ${newsList}" class="card-news">
+        <h2 th:text="${news.titulo}"></h2>
+        <p th:text="${news.resumo}"></p>
+        <small th:text="${news.redator.assinatura}"></small>
+        <small th:text="${#temporals.format(news.dataCriacao, 'dd/MM/yyyy')}"></small>
+        <a th:href="@{/news/{id}(id=${news.id})}">Leia mais</a>
+    </div>
+</body>
+</html>
