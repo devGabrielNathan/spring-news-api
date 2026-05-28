@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Authors")
@@ -38,4 +39,7 @@ public class Author {
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isEditor;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<News> news;
 }
