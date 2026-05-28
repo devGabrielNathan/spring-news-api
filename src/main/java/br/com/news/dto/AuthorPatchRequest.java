@@ -1,6 +1,5 @@
 package br.com.news.dto;
 
-import br.com.news.utils.SignatureStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,6 @@ public class AuthorPatchRequest {
     private String education;
 
     private String signature;
-
-    private SignatureStatus status;
 
     private Boolean isEditor;
 }

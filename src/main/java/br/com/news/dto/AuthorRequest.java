@@ -1,12 +1,15 @@
 package br.com.news.dto;
 
-import br.com.news.utils.SignatureStatus;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthorRequest {
     @NotBlank
     private String name;
@@ -24,8 +27,6 @@ public class AuthorRequest {
 
     @NotBlank
     private String signature;
-
-    private SignatureStatus status;
 
     private boolean isEditor;
 }
