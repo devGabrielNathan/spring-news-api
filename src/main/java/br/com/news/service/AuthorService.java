@@ -3,7 +3,7 @@ package br.com.news.service;
 import br.com.news.dto.AuthorPatchRequest;
 import br.com.news.dto.AuthorRequest;
 import br.com.news.dto.AuthorResponse;
-import br.com.news.entity.AuthorEntity;
+import br.com.news.entity.Author;
 import br.com.news.mapper.AuthorMapper;
 import br.com.news.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,48 +13,48 @@ import java.util.List;
 
 @Service
 public class AuthorService {
-    private AuthorRepository authorRepository;
-    private AuthorMapper authorMapper;
+    private final AuthorRepository authorRepository;
+    private final AuthorMapper authorMapper;
 
     @Autowired
     public AuthorService(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
     }
-
-    public AuthorResponse getAuthorById(Long id) {
-        AuthorEntity authorEntity = authorRepository.findById(id).orElseThrow();
-        return authorMapper.toResponse(authorEntity);
-    }
-
-    public List<AuthorResponse> getAllAuthors() {
-        List<AuthorEntity> authorEntities = authorRepository.findAll();
+    
+    public List<AuthorResponse> findAll() {
+        List<Author> authorEntities = authorRepository.findAll();
         return authorMapper.toResponseList(authorEntities);
     }
 
-    public AuthorResponse createAuthor(AuthorRequest authorRequest) {
-        if (authorRepository.existsByEmail(authorRequest.getEmail())) {
+    public AuthorResponse findById(Long id) {
+        Author author = authorRepository.findById(id).orElseThrow();
+        return authorMapper.toResponse(author);
+    }
+    
+    public AuthorResponse create(AuthorRequest request) {
+        if (authorRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("");
         }
 
-        AuthorEntity authorEntity = authorMapper.toEntity(authorRequest);
-        return authorMapper.toResponse(authorRepository.save(authorEntity));
+        Author author = authorMapper.toEntity(request);
+        return authorMapper.toResponse(authorRepository.save(author));
     }
 
-    public AuthorResponse updateAuthor(Long id, AuthorRequest authorRequest) {
+    public AuthorResponse update(Long id, AuthorRequest request) {
         authorRepository.findById(id).orElseThrow();
-        AuthorEntity updatedAuthor = authorMapper.toEntity(authorRequest);
+        Author updatedAuthor = authorMapper.toEntity(request);
         updatedAuthor.setId(id);
         return authorMapper.toResponse(authorRepository.save(updatedAuthor));
     }
 
-    public AuthorResponse patchAuthor(Long id, AuthorPatchRequest authorPatchRequest) {
-        AuthorEntity authorEntity = authorRepository.findById(id).orElseThrow();
-        authorMapper.updateEntityFromPatch(authorEntity, authorPatchRequest);
-        return authorMapper.toResponse(authorRepository.save(authorEntity));
+    public AuthorResponse patch(Long id, AuthorPatchRequest request) {
+        Author author = authorRepository.findById(id).orElseThrow();
+        authorMapper.updateEntityFromPatch(author, request);
+        return authorMapper.toResponse(authorRepository.save(author));
     }
 
-    public void deleteAuthor(Long id) {
+    public void delete(Long id) {
         authorRepository.findById(id).orElseThrow();
         authorRepository.deleteById(id);
     }
