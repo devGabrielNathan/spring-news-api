@@ -1,6 +1,5 @@
 package br.com.news.service;
 
-import br.com.news.dto.AuthorPatchRequest;
 import br.com.news.dto.AuthorRequest;
 import br.com.news.dto.AuthorResponse;
 import br.com.news.entity.Author;
@@ -46,12 +45,6 @@ public class AuthorService {
         Author updatedAuthor = authorMapper.toEntity(request);
         updatedAuthor.setId(id);
         return authorMapper.toResponse(authorRepository.save(updatedAuthor));
-    }
-
-    public AuthorResponse patch(Long id, AuthorPatchRequest request) {
-        Author author = authorRepository.findById(id).orElseThrow();
-        authorMapper.updateEntityFromPatch(author, request);
-        return authorMapper.toResponse(authorRepository.save(author));
     }
 
     public void delete(Long id) {
