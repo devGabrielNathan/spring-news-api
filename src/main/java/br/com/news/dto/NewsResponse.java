@@ -26,4 +26,5 @@ public class NewsResponse {
 
     private LocalDateTime updatedAt;
 
+    private LocalDateTime publicatedAt;
 }

@@ -41,6 +41,9 @@ public class News {
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
+    @Column(nullable = true, columnDefinition = "TIMESTAMP")
+    private LocalDateTime publicatedAt;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;

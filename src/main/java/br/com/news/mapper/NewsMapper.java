@@ -21,6 +21,7 @@ public class NewsMapper {
                 request.getStatus(),
                 null,
                 null,
+                null,
                 author
             );
     }
@@ -38,7 +39,8 @@ public class NewsMapper {
                 news.getContent(),
                 news.getStatus(),
                 news.getCreatedAt(),
-                news.getUpdatedAt()
+                news.getUpdatedAt(),
+                news.getPublicatedAt()
             );
     }
 
