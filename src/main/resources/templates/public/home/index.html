@@ -10,7 +10,7 @@
         <p th:text="${news.resumo}"></p>
         <small th:text="${news.redator.assinatura}"></small>
         <small th:text="${#temporals.format(news.dataCriacao, 'dd/MM/yyyy')}"></small>
-        <a th:href="@{/news/{id}(id=${news.id})}">Leia mais</a>
+        <a th:href="@{/admin/news/{id}(id=${news.id})}">Leia mais</a>
     </div>
 </body>
 </html>
